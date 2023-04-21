@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: Code First Open API spec example
+  title: Contract First Open API spec example
   version: "1.0"
 servers:
 - url: http://localhost:8080
