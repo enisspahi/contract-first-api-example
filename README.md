@@ -1,6 +1,6 @@
 # Contract First API Example
 
-This repository contains a an OpenAPI 3 specification on `contract-first` basis.
+This repository contains an OpenAPI 3 specification on `contract-first` basis.
 Open api spec is converted into a static html page to be served on [github pages](https://enisspahi.github.io/contract-first-api-example/).
 
 ## Below are some examples of publishing single page API Docs with multiple tools:
