@@ -13,12 +13,6 @@ paths:
       summary: Show all books
       operationId: findAllBooks
       responses:
-        "404":
-          description: Not Found
-          content:
-            '*/*':
-              schema:
-                type: string
         "200":
           description: OK
           content:
@@ -39,12 +33,6 @@ paths:
               $ref: '#/components/schemas/Book'
         required: true
       responses:
-        "404":
-          description: Not Found
-          content:
-            '*/*':
-              schema:
-                type: string
         "201":
           description: Created
           content:
