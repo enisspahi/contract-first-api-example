@@ -1,6 +1,10 @@
 name: Publish API Docs with spotlight elements
-run-name: ${{ github.actor }} is publishing API Docs with  spotlight elements 🚀
-on: [workflow_dispatch]
+run-name: ${{ github.actor }} is publishing API Docs with stoplight elements 🚀
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
 jobs:
   Generate-API-Docs:
     runs-on: ubuntu-latest

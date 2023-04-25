@@ -1,16 +1,18 @@
-openapi: 3.0.1
+openapi: 3.0.3
 info:
   title: Contract First Open API spec example
+  summary: This is an API First example
   version: "1.0"
 servers:
 - url: http://localhost:8080
-  description: Generated server url
+  description: Localhost server url
 paths:
   /books:
     get:
       tags:
       - Books API
       summary: Show all books
+      description: "Shows all books stored in the library"
       operationId: findAllBooks
       responses:
         "200":
@@ -25,6 +27,7 @@ paths:
       tags:
       - Books API
       summary: Create a book
+      description: "Creates a book and stores it at the library"
       operationId: createBook
       requestBody:
         content:
@@ -44,6 +47,7 @@ paths:
       tags:
       - Books API
       summary: Find book by isbn
+      description: "Finds a book by searching with an isbn"
       operationId: findBookByIsbn
       parameters:
       - name: isbn
@@ -71,7 +75,12 @@ components:
       properties:
         title:
           type: string
+          example: "Practical Design Patterns for Java Developers"
+          description: "The title of the Book"
         author:
           type: string
+          example: "Miroslav Wengner"
+          description: "The author of the Book"
         isbn:
           type: string
+          description: "The ISBN number"
