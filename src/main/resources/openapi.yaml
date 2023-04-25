@@ -33,7 +33,7 @@ info:
           Client->>BooksApi: GET /books
           BooksApi->>Library DB: findAll()
           Library DB-->>BooksApi: List<Book>
-          BooksApi-->>Client: Books[]
+          BooksApi-->>Client: Book[]
     ```
     
     # Quickstart
