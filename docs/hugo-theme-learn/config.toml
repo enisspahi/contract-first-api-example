@@ -1,0 +1,30 @@
+baseURL = '/'
+languageCode = 'en-us'
+title = 'API Docs'
+theme = 'hugo-theme-learn'
+
+
+[params]
+editURL = "https://github.com/enisspahi/contract-first-api-example/edit/main/docs/hugo-theme-learn/content/"
+description = "API Docs with hugo-theme-learn"
+author = "Enis Spahi"
+showVisitedLinks = true
+disableBreadcrumb = false
+disableNextPrev = false
+disableLandingPageButton = true
+disableMermaid = false
+customMermaidURL = "https://unpkg.com/mermaid@8.8.0/dist/mermaid.min.js"
+titleSeparator = "::"
+## Change default color scheme with a variant one. Can be "red", "blue", "green".
+themeVariant = "mine"
+
+# For search functionality
+[outputs]
+home = [ "HTML", "RSS", "JSON"]
+
+[[Languages.en.menu.shortcuts]]
+name = "<i class='fab fa-fw fa-github'></i> GitHub repo"
+identifier = "ds"
+url = "https://github.com/enisspahi/contract-first-api-example"
+weight = 10
+
