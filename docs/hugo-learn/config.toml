@@ -5,7 +5,7 @@ theme = 'hugo-theme-learn'
 
 
 [params]
-editURL = "https://github.com/enisspahi/contract-first-api-example/edit/main/docs/hugo-theme/content/"
+editURL = "https://github.com/enisspahi/contract-first-api-example/edit/main/docs/hugo-learn/content/"
 description = "API Docs with hugo-theme-learn"
 author = "Enis Spahi"
 showVisitedLinks = true
