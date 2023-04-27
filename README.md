@@ -1,7 +1,7 @@
 # Contract First API Example
 
 This repository contains an OpenAPI 3 specification on `contract-first` basis.
-Open api spec is converted into a static html page to be served on [github pages](https://enisspahi.github.io/contract-first-api-example/).
+Open api spec is converted into a static html page to be served on [GitHub pages](https://enisspahi.github.io/contract-first-api-example/).
 
 ## Below are some examples of publishing single page API Docs with multiple tools:
 
@@ -12,7 +12,7 @@ Open api spec is converted into a static html page to be served on [github pages
    `redocly build-docs src/main/resources/openapi.yaml -o docs/redoc/index.html`
 3. Observe generated `docs/redoc/index.html` page
 
-**[github-actions job](https://github.com/enisspahi/contract-first-api-example/actions/workflows/api-docs-with-redoc.yml)** can trigger the API Docs generation and publishes the generated docs to github pages.
+**[github-actions job](https://github.com/enisspahi/contract-first-api-example/actions/workflows/api-docs-with-redoc.yml)** can trigger the API Docs generation and publishes the generated docs to GitHub pages.
 
 ### Publishing API Docs as a single page API Doc using [Rapidoc](https://rapidocweb.com/)
 
@@ -20,7 +20,7 @@ Open api spec is converted into a static html page to be served on [github pages
    `cp rc/main/resources/openapi.yaml docs/rapidoc/`
 2. Run and observe `docs/rapidoc/index.html` page
 
-**[github-actions job](https://github.com/enisspahi/contract-first-api-example/actions/workflows/api-docs-with-rapidoc.yml)** can trigger the API Docs generation and publishes the generated docs to github pages.
+**[github-actions job](https://github.com/enisspahi/contract-first-api-example/actions/workflows/api-docs-with-rapidoc.yml)** can trigger the API Docs generation and publishes the generated docs to GitHub pages.
 
 ### Publishing API Docs as a single page API Doc using [Stoplight Elements](https://stoplight.io/open-source/elements)
 
@@ -28,7 +28,7 @@ Open api spec is converted into a static html page to be served on [github pages
    `cp rc/main/resources/openapi.yaml docs/elements/`
 2. Run and observe `docs/elements/index.html` page
 
-**[github-actions job](https://github.com/enisspahi/contract-first-api-example/actions/workflows/api-docs-with-elements.yml)** can trigger the API Docs generation and publishes the generated docs to github pages. 
+**[github-actions job](https://github.com/enisspahi/contract-first-api-example/actions/workflows/api-docs-with-elements.yml)** can trigger the API Docs generation and publishes the generated docs to GitHub pages. 
 
 ### Publishing API Docs as [Hugo Dockdock Theme](https://docdock.vjeantet.fr/) based static html page 
 
