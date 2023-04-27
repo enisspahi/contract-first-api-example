@@ -1,5 +1,5 @@
 ---
-title: Books API v1.0
+title: API Reference (markdown)
 language_tabs:
   - shell: Shell
 language_clients:
@@ -35,7 +35,7 @@ Base URLs:
 ```shell
 # You can also use wget
 curl -X GET http://localhost:8080/books \
-  -H 'Accept: */*'
+  -H 'Accept: application/json'
 
 ```
 
@@ -46,6 +46,16 @@ Shows all books stored in the library
 > Example responses
 
 > 200 Response
+
+```json
+[
+  {
+    "title": "Practical Design Patterns for Java Developers",
+    "author": "Miroslav Wengner",
+    "isbn": "string"
+  }
+]
+```
 
 <h3 id="show-all-books-responses">Responses</h3>
 
@@ -78,7 +88,7 @@ This operation does not require authentication
 # You can also use wget
 curl -X POST http://localhost:8080/books \
   -H 'Content-Type: application/json' \
-  -H 'Accept: */*'
+  -H 'Accept: application/json'
 
 ```
 
@@ -106,6 +116,14 @@ Creates a book and stores it at the library
 
 > 201 Response
 
+```json
+{
+  "title": "Practical Design Patterns for Java Developers",
+  "author": "Miroslav Wengner",
+  "isbn": "string"
+}
+```
+
 <h3 id="create-a-book-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -125,7 +143,7 @@ This operation does not require authentication
 ```shell
 # You can also use wget
 curl -X GET http://localhost:8080/books/{isbn} \
-  -H 'Accept: */*'
+  -H 'Accept: application/json'
 
 ```
 
@@ -142,6 +160,16 @@ Finds a book by searching with an isbn
 > Example responses
 
 > 200 Response
+
+```json
+{
+  "title": "Practical Design Patterns for Java Developers",
+  "author": "Miroslav Wengner",
+  "isbn": "string"
+}
+```
+
+> 404 Response
 
 <h3 id="find-book-by-isbn-responses">Responses</h3>
 

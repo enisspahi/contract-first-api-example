@@ -32,10 +32,12 @@ Open api spec is converted into a static html page to be served on [GitHub pages
 
 ### Publishing API Docs as [Hugo Dockdock Theme](https://docdock.vjeantet.fr/) based static html page 
 
-1. Run the following command to copy the up-to-date Open API Spec under `docs/elements/`
+1. Run the following command to generate markdown add add it to contents
    `widdershins --search false --language_tabs 'shell:Shell' --summary src/main/resources/openapi.yaml -o docs/hugo-docdock/content/api_reference/_index.md`
-2. Change directory
+2. Run the following command to add OpenAPI Spec for embedded html
+   `cp src/main/resources/openapi.yaml docs/hugo-docdock/static/`
+3. Change directory
    `cd docs/hugo-docdock`
-3. Start Hugo on local
+4. Start Hugo on local
    `hugo server`
 
