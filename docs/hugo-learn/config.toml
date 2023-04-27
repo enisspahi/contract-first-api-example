@@ -19,6 +19,10 @@ titleSeparator = "::"
 ## Change default color scheme with a variant one. Can be "red", "blue", "green".
 themeVariant = "mine"
 
+[markup]
+[markup.goldmark.renderer]
+unsafe = true
+
 # For search functionality
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
