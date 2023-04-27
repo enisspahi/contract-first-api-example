@@ -1,11 +1,20 @@
 ---
-title: API Reference
-weight: 10
+title: Books API v1.0
+language_tabs:
+  - shell: Shell
+language_clients:
+  - shell: ""
+toc_footers: []
+includes: []
+search: false
+highlight_theme: darkula
+headingLevel: 2
+
 ---
 
 <!-- Generator: Widdershins v4.0.1 -->
 
-<h1 id="books-api-openapi-specification">Books API - OpenAPI specification v1.0</h1>
+<h1 id="books-api">Books API v1.0</h1>
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
@@ -15,7 +24,7 @@ Base URLs:
 
 * <a href="http://localhost:8080">http://localhost:8080</a>
 
-<h1 id="books-api-openapi-specification-books-api">Books API</h1>
+<h1 id="books-api-books-api">Books API</h1>
 
 ## Show all books
 
@@ -23,31 +32,10 @@ Base URLs:
 
 > Code samples
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => '*/*'
-}
-
-result = RestClient.get 'http://localhost:8080/books',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': '*/*'
-}
-
-r = requests.get('http://localhost:8080/books', headers = headers)
-
-print(r.json())
+```shell
+# You can also use wget
+curl -X GET http://localhost:8080/books \
+  -H 'Accept: */*'
 
 ```
 
@@ -86,33 +74,11 @@ This operation does not require authentication
 
 > Code samples
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'application/json',
-  'Accept' => '*/*'
-}
-
-result = RestClient.post 'http://localhost:8080/books',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/json',
-  'Accept': '*/*'
-}
-
-r = requests.post('http://localhost:8080/books', headers = headers)
-
-print(r.json())
+```shell
+# You can also use wget
+curl -X POST http://localhost:8080/books \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: */*'
 
 ```
 
@@ -156,31 +122,10 @@ This operation does not require authentication
 
 > Code samples
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => '*/*'
-}
-
-result = RestClient.get 'http://localhost:8080/books/{isbn}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': '*/*'
-}
-
-r = requests.get('http://localhost:8080/books/{isbn}', headers = headers)
-
-print(r.json())
+```shell
+# You can also use wget
+curl -X GET http://localhost:8080/books/{isbn} \
+  -H 'Accept: */*'
 
 ```
 

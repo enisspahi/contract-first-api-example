@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Books API - OpenAPI specification
+  title: Books API
   version: "1.0"
   description: |
       This is an API First example of Books API.
