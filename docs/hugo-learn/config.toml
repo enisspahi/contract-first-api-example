@@ -2,7 +2,8 @@ baseURL = '/'
 languageCode = 'en-us'
 title = 'API Docs'
 theme = 'hugo-theme-learn'
-
+relativeURLs = true
+uglyURLs = true
 
 [params]
 editURL = "https://github.com/enisspahi/contract-first-api-example/edit/main/docs/hugo-learn/content/"
