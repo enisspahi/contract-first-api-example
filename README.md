@@ -17,7 +17,7 @@ Open api spec is converted into a static html page to be served on [GitHub pages
 ### Publishing API Docs as a single page API Doc using [Rapidoc](https://rapidocweb.com/)
 
 1. Run the following command to copy the up-to-date Open API Spec under `docs/rapidoc/`
-   `cp rc/main/resources/openapi.yaml docs/rapidoc/`
+   `cp src/main/resources/openapi.yaml docs/rapidoc/`
 2. Run and observe `docs/rapidoc/index.html` page
 
 **[github-actions job](https://github.com/enisspahi/contract-first-api-example/actions/workflows/api-docs-with-rapidoc.yml)** can trigger the API Docs generation and publishes the generated docs to GitHub pages.
@@ -25,7 +25,7 @@ Open api spec is converted into a static html page to be served on [GitHub pages
 ### Publishing API Docs as a single page API Doc using [Stoplight Elements](https://stoplight.io/open-source/elements)
 
 1. Run the following command to copy the up-to-date Open API Spec under `docs/elements/`
-   `cp rc/main/resources/openapi.yaml docs/elements/`
+   `cp src/main/resources/openapi.yaml docs/elements/`
 2. Run and observe `docs/elements/index.html` page
 
 **[github-actions job](https://github.com/enisspahi/contract-first-api-example/actions/workflows/api-docs-with-elements.yml)** can trigger the API Docs generation and publishes the generated docs to GitHub pages. 
