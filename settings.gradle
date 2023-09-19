@@ -1,4 +1,17 @@
+pluginManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+        mavenLocal()
+    }
+    plugins {
+        id "${quarkusPluginId}" version "${quarkusPluginVersion}"
+        id "org.openapi.generator" version "7.0.0-beta"
+    }
+}
+
 rootProject.name = 'contract-first-api-example'
 include 'api'
 include 'spring-web-service'
+include 'quarkus-web-service'
 
