@@ -1,0 +1,156 @@
+openapi: 3.0.3
+info:
+  title: Recipes API
+  version: "1.0"
+  description: |
+    Recipes API - API First example
+
+servers:
+- url: http://localhost:8080
+  description: Localhost server url
+paths:
+  /recipes:
+    get:
+      tags:
+        - Recipes API
+      summary: List all recipes
+      description: "Shows recipes based on search criteria"
+      operationId: findRecipes
+      parameters:
+        - name: title
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: ingredients
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: nutritionFacts
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - LOW_CALORIE
+                - HIGH_CALORIE
+                - HIGH_PROTEIN
+                - CARBS
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "200":
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recipe'
+    post:
+      tags:
+        - Recipes API
+      summary: Create a recipe
+      description: "Creates a recipe and stores it"
+      operationId: createRecipe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Recipe'
+        required: true
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "201":
+          description: Created
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Recipe'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          enum:
+            - UNEXPECTED
+            - NOT_FOUND
+        message:
+          type: string
+    Ingredient:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the ingredient
+          example: Kidney beans
+        quantity:
+          type: number
+          description: Quantity depending on unit
+          format: double
+          example: 250
+        unit:
+          type: string
+          description: "Quantifying unit of the ingredient (grams, milliliters, count, tablespoon)"
+          example: grams
+      description: List of ingredients
+    Recipe:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title of the recipe
+          example: Chilli sin Carne
+        ingredients:
+          type: array
+          description: List of ingredients
+          items:
+            $ref: '#/components/schemas/Ingredient'
+        preparationTime:
+          type: integer
+          description: Preparation time (in minutes)
+          format: int32
+          example: 30
+        cookingTime:
+          type: integer
+          description: Cooking time (in minutes)
+          format: int32
+          example: 15
+        servings:
+          type: integer
+          description: Served for persons
+          format: int32
+          example: 4
+        instructions:
+          type: array
+          description: Step by step instructions
+          items:
+            type: string
+            description: Step by step instructions
+        nutritionFacts:
+          type: array
+          description: Nutrition facts
+          items:
+            type: string
+            description: Nutrition facts
+            enum:
+              - LOW_CALORIE
+              - HIGH_CALORIE
+              - HIGH_PROTEIN
+              - CARBS
