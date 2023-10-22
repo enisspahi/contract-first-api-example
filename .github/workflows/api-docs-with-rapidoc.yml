@@ -7,7 +7,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - run: cp src/main/resources/openapi.yaml docs/rapidoc/
+      - run: cp api/src/main/resources/recipes-api.yaml docs/rapidoc/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:

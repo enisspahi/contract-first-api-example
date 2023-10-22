@@ -10,7 +10,7 @@ jobs:
       - name: redoc-cli
         uses: seeebiii/redoc-cli-github-action@v10
         with:
-          args: 'bundle src/main/resources/openapi.yaml -o docs/redoc/index.html'
+          args: 'bundle api/src/main/resources/recipes-api.yaml -o docs/redoc/index.html'
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
