@@ -1,5 +1,5 @@
 ---
-title: Recipes API v1.0
+title: Recipes API Reference (widdershins)
 language_tabs:
   - shell: Shell
 language_clients:

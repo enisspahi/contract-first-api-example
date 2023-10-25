@@ -1,5 +1,5 @@
 ---
-title: API Reference (stoplight)
+title: Recipes API Reference (stoplight)
 weight: 3
 ---
 
