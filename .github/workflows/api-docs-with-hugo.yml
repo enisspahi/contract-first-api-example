@@ -24,7 +24,8 @@ jobs:
           fetch-depth: 0
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
-      - run: cp api/src/main/resources/recipes-api.yaml docs/hugo-docdock/static/
+      - name: Deploy API Specification
+        run: cp api/src/main/resources/recipes-api.yaml docs/hugo-docdock/static/
       - name: Build with Hugo
         env:
           # For maximum backward compatibility with Hugo modules
