@@ -40,4 +40,5 @@ Open api spec is converted into a static html page to be served on [GitHub pages
    `cd docs/hugo-docdock`
 4. Start Hugo on local
    `hugo server`
+**[github-actions job](https://github.com/enisspahi/contract-first-api-example/actions/workflows/api-docs-with-hugo.yml)** can trigger the API Docs generation and publishes the generated docs to GitHub pages.
 
