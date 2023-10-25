@@ -2,9 +2,6 @@ name: Publish API Docs with Hugo
 run-name: ${{ github.actor }} is publishing API Docs with Uugo 🚀
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
 jobs:
   Generate-API-Docs:
     runs-on: ubuntu-latest
