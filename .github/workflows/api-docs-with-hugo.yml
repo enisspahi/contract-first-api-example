@@ -1,5 +1,5 @@
 name: Publish API Docs with Hugo
-run-name: ${{ github.actor }} is publishing API Docs with Uugo 🚀
+run-name: ${{ github.actor }} is publishing API Docs with Hugo 🚀
 on:
   workflow_dispatch:
 jobs:
@@ -31,7 +31,7 @@ jobs:
           hugo \
             --gc \
             --minify \
-            --source docs/hugo-docdock
+            --source docs/hugo-docdock \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
