@@ -14,6 +14,8 @@ import org.apache.hc.client5.http.fluent.Request;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.Optional;
+import java.util.Set;
 
 import static au.com.dius.pact.consumer.dsl.LambdaDsl.newJsonArray;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,29 +32,57 @@ public class ConsumerContractTestsWithOASValidation {
             .build();
 
     @Pact(provider = RECIPES_PROVIDER, consumer = RECIPES_CONSUMER)
-    public RequestResponsePact pact(PactDslWithProvider builder) {
-        var pact = builder
-                .given("Recipes API is implemented")
-                .uponReceiving("GET /recipes interaction")
+    public RequestResponsePact getAllRecipesPact(PactDslWithProvider builder) {
+        var getAllRecipesPact = builder
+                .given("Recipes API has recipes")
+                .uponReceiving("GET all recipes")
                 .path("/recipes")
                 .method("GET")
                 .willRespondWith()
                 .status(200)
-                .body(recipesResponseStructure())
+                .body(recipesResponseStructure(Optional.empty()))
                 .toPact();
-        validate(pact);
-        return pact;
+        validate(getAllRecipesPact);
+        return getAllRecipesPact;
+    }
+
+    @Pact(provider = RECIPES_PROVIDER, consumer = RECIPES_CONSUMER)
+    public RequestResponsePact getRecipesByNutritionPact(PactDslWithProvider builder) {
+        var getRecipesByNutritionPact = builder
+                .given("Recipes API has recipes")
+                .uponReceiving("GET LOW_CALORIE and HIGH_PROTEIN recipes")
+                .path("/recipes")
+                .query("nutritionFacts=LOW_CALORIE&nutritionFacts=HIGH_PROTEIN")
+                .method("GET")
+                .willRespondWith()
+                .status(200)
+                .body(recipesResponseStructure(Optional.of(Set.of("LOW_CALORIE", "HIGH_PROTEIN"))))
+                .toPact();
+        validate(getRecipesByNutritionPact);
+        return getRecipesByNutritionPact;
     }
 
     @Test
-    void test(MockServer mockServer) throws IOException {
-        var httpResponse = Request.get(mockServer.getUrl() + "/recipes").execute().returnResponse();
+    @PactTestFor(pactMethod = "getAllRecipesPact")
+    void getsAllRecipes(MockServer mockServer) throws IOException {
+        var httpResponse = Request.get(mockServer.getUrl() + "/recipes")
+                .execute()
+                .returnResponse();
         assertEquals(200, httpResponse.getCode());
     }
 
-    public DslPart recipesResponseStructure() {
-        return newJsonArray((array) -> {
-            array.object((recipe) -> {
+    @Test
+    @PactTestFor(pactMethod = "getRecipesByNutritionPact")
+    void getsRecipesWithPreferredNutritionInput(MockServer mockServer) throws IOException {
+        var httpResponse = Request.get(mockServer.getUrl() + "/recipes?nutritionFacts=LOW_CALORIE&nutritionFacts=HIGH_PROTEIN")
+                .execute()
+                .returnResponse();
+        assertEquals(200, httpResponse.getCode());
+    }
+
+    public DslPart recipesResponseStructure(Optional<Set<String>> expectedNutritionValues) {
+        return newJsonArray(array -> {
+            array.object(recipe -> {
                 recipe.stringType("title", "Chilli sin Carne");
                 recipe.array("ingredients", ingredientsArray -> {
                     ingredientsArray.object(ingredient -> {
@@ -65,7 +95,15 @@ public class ConsumerContractTestsWithOASValidation {
                 recipe.numberType("cookingTime", 15);
                 recipe.numberType("servings", 4);
                 recipe.array("instructions", instructions -> instructions.stringType("string"));
+
                 recipe.array("nutritionFacts", nutritionFacts -> nutritionFacts.stringType("LOW_CALORIE"));
+
+                recipe.array("nutritionFacts", nutritionFacts ->
+                        expectedNutritionValues.ifPresentOrElse(values ->
+                                        values.forEach(expectedNutritionValue -> nutritionFacts.stringValue(expectedNutritionValue)),
+                                () -> nutritionFacts.stringType("LOW_CALORIE"))
+                );
+
             });
         }).build();
     }
