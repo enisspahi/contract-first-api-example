@@ -5,13 +5,13 @@ pluginManagement {
         mavenLocal()
     }
     plugins {
-        id "org.openapi.generator" version "7.0.0-beta"
+        id "org.openapi.generator" version "7.1.0"
     }
 }
 
 rootProject.name = 'contract-first-api-example'
 
 include 'api'
-include 'service'
 include 'client'
+include 'service'
 

@@ -1,3 +1,5 @@
+package com.enisspahi.example.pact;
+
 import au.com.dius.pact.consumer.MockServer;
 import au.com.dius.pact.consumer.dsl.DslPart;
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
@@ -17,12 +19,12 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.Set;
 
-import static au.com.dius.pact.consumer.dsl.LambdaDsl.newJsonArray;
+import static au.com.dius.pact.consumer.dsl.LambdaDsl.newJsonArrayMinLike;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @PactConsumerTest
-@PactTestFor(providerName = ConsumerContractTestsWithOASValidation.RECIPES_PROVIDER, pactVersion = PactSpecVersion.V3)
-public class ConsumerContractTestsWithOASValidation {
+@PactTestFor(providerName = ConsumerContractTestsWithSpecValidation.RECIPES_PROVIDER, pactVersion = PactSpecVersion.V3)
+public class ConsumerContractTestsWithSpecValidation {
 
     static final String RECIPES_PROVIDER = "RecipesAPI";
     static final String RECIPES_CONSUMER = "RecipesClient";
@@ -31,36 +33,51 @@ public class ConsumerContractTestsWithOASValidation {
             .createForSpecificationUrl("https://raw.githubusercontent.com/enisspahi/contract-first-api-example/main/api/src/main/resources/recipes-api.yaml")
             .build();
 
+
     @Pact(provider = RECIPES_PROVIDER, consumer = RECIPES_CONSUMER)
     public RequestResponsePact getAllRecipesPact(PactDslWithProvider builder) {
-        var getAllRecipesPact = builder
-                .given("Recipes API has recipes")
+        var pact = builder
                 .uponReceiving("GET all recipes")
+                    .path("/recipes")
+                    .method("GET")
+                .willRespondWith()
+                    .status(200)
+                    .body(recipesResponseStructure(Optional.empty(), Optional.empty()))
+                .toPact();
+        validate(pact);
+        return pact;
+    }
+
+    @Pact(provider = RECIPES_PROVIDER, consumer = RECIPES_CONSUMER)
+    public RequestResponsePact getRecipesByTitlePact(PactDslWithProvider builder) {
+        var pact = builder
+                .uponReceiving("GET pumpkin recipes")
                 .path("/recipes")
+                .query("title=Pumpkin")
                 .method("GET")
                 .willRespondWith()
                 .status(200)
-                .body(recipesResponseStructure(Optional.empty()))
+                .body(recipesResponseStructure(Optional.of("Pumpkin"), Optional.empty()))
                 .toPact();
-        validate(getAllRecipesPact);
-        return getAllRecipesPact;
+        validate(pact);
+        return pact;
     }
 
     @Pact(provider = RECIPES_PROVIDER, consumer = RECIPES_CONSUMER)
     public RequestResponsePact getRecipesByNutritionPact(PactDslWithProvider builder) {
-        var getRecipesByNutritionPact = builder
-                .given("Recipes API has recipes")
+        var pact = builder
                 .uponReceiving("GET LOW_CALORIE and HIGH_PROTEIN recipes")
                 .path("/recipes")
                 .query("nutritionFacts=LOW_CALORIE&nutritionFacts=HIGH_PROTEIN")
                 .method("GET")
                 .willRespondWith()
                 .status(200)
-                .body(recipesResponseStructure(Optional.of(Set.of("LOW_CALORIE", "HIGH_PROTEIN"))))
+                .body(recipesResponseStructure(Optional.empty(), Optional.of(Set.of("LOW_CALORIE", "HIGH_PROTEIN"))))
                 .toPact();
-        validate(getRecipesByNutritionPact);
-        return getRecipesByNutritionPact;
+        validate(pact);
+        return pact;
     }
+
 
     @Test
     @PactTestFor(pactMethod = "getAllRecipesPact")
@@ -71,19 +88,32 @@ public class ConsumerContractTestsWithOASValidation {
         assertEquals(200, httpResponse.getCode());
     }
 
+
+    @Test
+    @PactTestFor(pactMethod = "getRecipesByTitlePact")
+    void getsRecipesByTitle(MockServer mockServer) throws IOException {
+        var httpResponse = Request.get(mockServer.getUrl() + "/recipes?title=Pumpkin")
+                .execute()
+                .returnResponse();
+        assertEquals(200, httpResponse.getCode());
+    }
+
     @Test
     @PactTestFor(pactMethod = "getRecipesByNutritionPact")
-    void getsRecipesWithPreferredNutritionInput(MockServer mockServer) throws IOException {
+    void getsRecipesByNutrition(MockServer mockServer) throws IOException {
         var httpResponse = Request.get(mockServer.getUrl() + "/recipes?nutritionFacts=LOW_CALORIE&nutritionFacts=HIGH_PROTEIN")
                 .execute()
                 .returnResponse();
         assertEquals(200, httpResponse.getCode());
     }
 
-    public DslPart recipesResponseStructure(Optional<Set<String>> expectedNutritionValues) {
-        return newJsonArray(array -> {
+    public DslPart recipesResponseStructure(Optional<String> expectedTitle, Optional<Set<String>> expectedNutritionValues) {
+        return newJsonArrayMinLike(1, array -> {
             array.object(recipe -> {
-                recipe.stringType("title", "Chilli sin Carne");
+                expectedTitle.ifPresentOrElse(
+                        expectedValue -> recipe.stringMatcher("title", expectedValue + ".*"),
+                        () -> recipe.stringType("title", "Chilli sin Carne")
+                );
                 recipe.array("ingredients", ingredientsArray -> {
                     ingredientsArray.object(ingredient -> {
                         ingredient.stringType("name", "Kidney beans");
@@ -96,13 +126,13 @@ public class ConsumerContractTestsWithOASValidation {
                 recipe.numberType("servings", 4);
                 recipe.array("instructions", instructions -> instructions.stringType("string"));
 
-                recipe.array("nutritionFacts", nutritionFacts -> nutritionFacts.stringType("LOW_CALORIE"));
+                recipe.arrayContaining("nutritionFacts", nutritionFacts -> {
+                    expectedNutritionValues.ifPresentOrElse(
+                            expectedValues -> expectedValues.forEach(expectedValue -> nutritionFacts.stringMatcher(expectedValue, expectedValue)),
+                            () -> nutritionFacts.stringType("LOW_CALORIE")
+                    );
 
-                recipe.array("nutritionFacts", nutritionFacts ->
-                        expectedNutritionValues.ifPresentOrElse(values ->
-                                        values.forEach(expectedNutritionValue -> nutritionFacts.stringValue(expectedNutritionValue)),
-                                () -> nutritionFacts.stringType("LOW_CALORIE"))
-                );
+                });
 
             });
         }).build();

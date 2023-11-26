@@ -88,6 +88,7 @@ recipes:
         quantity: 0.5
         unit: tablespoon
     preparationTime: 10
+    cookingTime: 0
     servings: 2
     instructions:
       - "Mix tuna with salad greens, cherry tomatoes, and sliced onion."

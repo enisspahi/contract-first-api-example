@@ -30,9 +30,10 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'au.com.dius.pact.provider:junit5spring:4.6.3'
 }
 
 test {
@@ -44,13 +45,13 @@ springBoot {
 }
 
 openApiGenerate {
-    generatorName.set("spring")
-    inputSpec.set("$rootDir/api/src/main/resources/recipes-api.yaml")
-    outputDir.set("$buildDir/generated")
-    apiPackage.set("com.enisspahi.example.api.controller")
-    invokerPackage.set("com.enisspahi.example.api")
-    modelPackage.set("com.enisspahi.example.api.model")
-    configOptions.set([
+    generatorName = "spring"
+    inputSpec = "$rootDir/api/src/main/resources/recipes-api.yaml"
+    outputDir = "$buildDir/generated"
+    apiPackage = "com.enisspahi.example.api.controller"
+    invokerPackage = "com.enisspahi.example.api"
+    modelPackage = "com.enisspahi.example.api.model"
+    configOptions = [
             library: "spring-boot",
             dateLibrary: "java8",
             delegatePattern: "true",
@@ -61,10 +62,9 @@ openApiGenerate {
             documentationProvider: "none",
             useSwaggerUI: "false",
             useSpringBoot3: "true"
-    ])
+    ]
 }
 
 openApiValidate {
     inputSpec.set("$rootDir/api/src/main/resources/recipes-api.yaml")
-
 }
