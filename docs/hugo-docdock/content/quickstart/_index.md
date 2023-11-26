@@ -3,6 +3,7 @@ title: Quickstart
 weight: 2
 ---
 
+
 ### API Connection
 * Clone API from [github project](https://github.com/enisspahi/contract-first-api-example) 
 * Start API
@@ -16,7 +17,9 @@ curl --location 'http://localhost:8080/recipes?title=Pumpkin'
 curl --location 'http://localhost:8080/recipes?nutritionFacts=LOW_CALORIE&nutritionFacts=HIGH_PROTEIN'
 ````
 
+
 ### Client Code Generation
+
 
 #### OpenAPI Generator Java example with Gradle 
 * Add plugin
@@ -25,11 +28,11 @@ plugins {
     id "org.openapi.generator" version "7.1.0"
 }
 ````
-* Configure plugin
+* Configure plugin. Ensure [recipes-api.yaml](https://raw.githubusercontent.com/enisspahi/contract-first-api-example/main/api/src/main/resources/recipes-api.yaml) added to your project. 
 ````
 openApiGenerate {
     generatorName = "java"
-    inputSpec = "$rootDir/api/src/main/resources/recipes-api.yaml"
+    inputSpec = "$rootDir/src/main/resources/recipes-api.yaml"
     outputDir = "$buildDir/generated"
     apiPackage = "preferred package"
     invokerPackage = "preferred package"
