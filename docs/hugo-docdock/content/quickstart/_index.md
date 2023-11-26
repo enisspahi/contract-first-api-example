@@ -3,8 +3,9 @@ title: Quickstart
 weight: 2
 ---
 
-Clone API from [github project](https://github.com/enisspahi/code-first-api-example) and run
+* Clone API from [github project](https://github.com/enisspahi/contract-first-api-example) 
+* Start API
 ````
-./gradlew bootRun
-````
+./gradlew :service:bootRun
+```` 
 Then try out the api calls.
