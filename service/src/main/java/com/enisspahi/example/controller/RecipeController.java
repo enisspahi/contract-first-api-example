@@ -5,13 +5,13 @@ import com.enisspahi.example.api.model.Recipe;
 import com.enisspahi.example.service.RecipeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Service
 public class RecipeController implements RecipesApiDelegate {
 
     private final RecipeService recipeService;
