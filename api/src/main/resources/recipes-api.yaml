@@ -41,6 +41,7 @@ paths:
                 - HIGH_CALORIE
                 - HIGH_PROTEIN
                 - CARBS
+                - HIGH_ALCOHOL
       responses:
         "500":
           description: Internal Server Error
