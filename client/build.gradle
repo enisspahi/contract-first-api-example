@@ -1,12 +1,16 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.0.6'
-    id 'io.spring.dependency-management' version '1.1.0'
-    id "org.openapi.generator" version "7.1.0"
+    id 'org.springframework.boot' version '3.3.3'
+    id 'io.spring.dependency-management' version '1.1.6'
+    id "org.openapi.generator" version "7.8.0"
 }
 
 group = 'com.enisspahi.example'
 version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+}
 
 compileJava.dependsOn tasks.openApiGenerate
 
@@ -27,8 +31,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation platform('org.junit:junit-bom:5.9.1')
-    testImplementation 'au.com.dius.pact.consumer:junit5:4.6.3'
-    testImplementation 'com.atlassian.oai:swagger-request-validator-pact:2.39.0'
+    testImplementation 'au.com.dius.pact.consumer:junit5:4.6.14'
+    testImplementation 'com.atlassian.oai:swagger-request-validator-pact:2.41.0'
 }
 
 test {

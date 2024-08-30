@@ -28,7 +28,7 @@ public class RecipeController implements RecipesApiDelegate {
 
     @Override
     public ResponseEntity<List<Recipe>> findRecipes(Optional<String> title, Optional<List<String>> ingredients, Optional<List<String>> nutritionFacts) {
-        var responseBody = recipeService.search(title, ingredients.orElse(Collections.EMPTY_LIST), nutritionFacts.orElse(Collections.EMPTY_LIST));
+        var responseBody = recipeService.search(title, ingredients.orElse(Collections.emptyList()), nutritionFacts.orElse(Collections.emptyList()));
         return new ResponseEntity<>(responseBody, HttpStatus.OK);
     }
 }
