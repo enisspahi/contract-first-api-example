@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="container results-container">
-    <button onclick="window.location.href='/'" class="go-home-btn">Go Home</button>
+    <button onclick="window.location.href='/'" class="go-home-btn">New search</button>
     <h2>Recipes</h2>
     <div th:each="recipe, stat : ${recipes}" class="recipe">
         <h3 th:text="${stat.count + '. ' + recipe.title}">Recipe Title</h3>

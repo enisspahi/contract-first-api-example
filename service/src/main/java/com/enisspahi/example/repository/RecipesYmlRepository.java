@@ -4,7 +4,6 @@ import com.enisspahi.example.api.model.Ingredient;
 import com.enisspahi.example.api.model.Recipe;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +12,7 @@ import java.util.stream.Collectors;
 
 @Component
 @Slf4j
-class RecipeYmlRepository implements RecipeRepository {
+class RecipesYmlRepository implements RecipesRepository {
 
     private final List<Recipe> recipes = YamlSourceReader.readFromYaml();
 

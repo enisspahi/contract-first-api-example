@@ -13,7 +13,7 @@ final class YamlSourceReader {
 
     static List<Recipe> readFromYaml() {
         var yaml = new Yaml();
-        InputStream inputStream = RecipeYmlRepository.class.getResourceAsStream("/recipes/recipes.yml");
+        InputStream inputStream = RecipesYmlRepository.class.getResourceAsStream("/recipes/recipes.yml");
         RecipesDTOWrapper recipesDTOList = yaml.loadAs(inputStream, RecipesDTOWrapper.class);
         return recipesDTOList.recipes.stream()
                 .map(YamlSourceReader::toAPIModel)

@@ -31,8 +31,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation platform('org.junit:junit-bom:5.9.1')
-    testImplementation 'au.com.dius.pact.consumer:junit5:4.6.14'
-    testImplementation 'com.atlassian.oai:swagger-request-validator-pact:2.41.0'
 }
 
 test {
@@ -46,6 +44,7 @@ openApiGenerate {
     apiPackage = "com.enisspahi.example.api"
     invokerPackage = "com.enisspahi.example.api.invoker"
     modelPackage = "com.enisspahi.example.api.model"
+    apiNameSuffix = "."
     configOptions = [
             library: "native",
             dateLibrary: "java8",

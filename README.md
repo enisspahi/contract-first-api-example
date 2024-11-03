@@ -3,6 +3,20 @@
 This repository contains an OpenAPI 3 specification on `contract-first` basis.
 Open api spec is converted into a static html page to be served on [GitHub pages](https://enisspahi.github.io/contract-first-api-example/).
 
+## API
+- API Spec: [recipes-api.yaml](api/src/main/resources/recipes-api.yaml) 
+
+## Starting the Service
+
+- Start the application running `./gradlew :service:bootRun`
+
+## Starting the Client
+
+1. Start the application running:
+   `./gradlew :client:bootRun`
+2. Open client application in browser [http://localhost:8082](http://localhost:8082)
+
+
 ## Below are some examples of publishing single page API Docs with multiple tools:
 
 ### Publishing API Docs as a single page API Doc using [Redocly](https://redocly.com/)

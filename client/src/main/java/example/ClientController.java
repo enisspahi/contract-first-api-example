@@ -1,6 +1,6 @@
 package example;
 
-import com.enisspahi.example.api.RecipesApiApi;
+import com.enisspahi.example.api.RecipesApi;
 import com.enisspahi.example.api.invoker.ApiException;
 import com.enisspahi.example.api.model.Recipe;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,7 @@ import java.util.Optional;
 @Controller
 public class ClientController {
 
-    private final RecipesApiApi recipesApi = new RecipesApiApi();
+    private final RecipesApi recipesApi = new RecipesApi();
 
     @GetMapping("/")
     public String defaultPage() {
@@ -23,7 +23,7 @@ public class ClientController {
     }
 
     @PostMapping("/searchRecipe")
-    public String handleSubmit(@RequestParam Optional<String> title,
+    public String handleSearch(@RequestParam Optional<String> title,
                                @RequestParam Optional<List<String>> ingredients,
                                @RequestParam Optional<List<String>> nutritionFacts,
                                Model model) {
